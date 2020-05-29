@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using UnicornDemo.Entities.DTOs;
 using UnicornDemo.Entities.Models;
 
@@ -21,12 +22,22 @@ namespace UnicornDemo.Services{
                 var user = unitOfWork.Usuarios.Get(x=>x.Id== idUsuario);
                 if (user != null)
                 {
-                    //var contactos = unitOfWork.Contactos.Get(x => x.IdUsuario == idUsuario);
-                    //if (contactos != null)
-                    //    var result =CreateMappedObject(contactos);
-                    //return Ok(result);
-                    //else
-                       return Ok();
+                    var contactos = unitOfWork.Contactos.Get(x => x.IdUsuario == idUsuario);
+                    if (contactos != null)
+                    {
+                        var result = CreateMappedObject(contactos, idUsuario);
+
+                        var serializedlist = JsonConvert.SerializeObject(result, Formatting.Indented,
+                            new JsonSerializerSettings()
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                            });
+
+
+                        return Ok(serializedlist);
+                    }
+                    else
+                        return NoContent();
                 }
                 else
                 {
@@ -40,15 +51,17 @@ namespace UnicornDemo.Services{
             }
         }
 
-        //private List<ContactosList> CreateMappedObject(IEnumerable<Contacto> contactos)
-        //{
-        //    ContactosList listFriends = new ContactosList();
-        //    foreach (var item in contactos)
-        //    {
-        //        var contactoAmigo = unitOfWork.Usuarios.Get(x => x.Id == item.IdContacto);
-        //        listFriends.usuarios.Add(contactoAmigo);
-        //    }
-        //}
+        private ContactosList CreateMappedObject(IEnumerable<Contacto> contactos, int idUser)
+        {
+            ContactosList listFriends = new ContactosList();
+            foreach (var item in contactos)
+            {
+                Usuario contactoAmigo = unitOfWork.Usuarios.GetByID(item.IdContacto);
+                listFriends.usuarios.Add(contactoAmigo);
+            }
+            listFriends.idUserFriend = idUser;
+            return listFriends;
+        }
 
         [HttpGet("{id}/{contactoid, }")]
         public IActionResult GetContactDetails(int Id, bool isFriend)

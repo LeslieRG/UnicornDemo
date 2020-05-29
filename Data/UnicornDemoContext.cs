@@ -36,17 +36,17 @@ namespace UnicornDemo.Entities.Models
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
-                entity.HasOne(d => d.IdContactoNavigation)
-                    .WithMany(p => p.ContactoIdContactoNavigation)
-                    .HasForeignKey(d => d.IdContacto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Contacto");
+                //entity.HasOne(d => d.IdContactoNavigation)
+                //    .WithMany(p => p.ContactoIdContactoNavigation)
+                //    .HasForeignKey(d => d.IdContacto)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Contacto");
 
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.ContactoIdUsuarioNavigation)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Usuario");
+                //entity.HasOne(d => d.IdUsuarioNavigation)
+                //    .WithMany(p => p.ContactoIdUsuarioNavigation)
+                //    .HasForeignKey(d => d.IdUsuario)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Usuario");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -70,6 +70,11 @@ namespace UnicornDemo.Entities.Models
                 entity.Property(e => e.NombreUsuario)
                     .HasMaxLength(15)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Sexo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength();
 
                 entity.Property(e => e.Telefono)
                     .HasMaxLength(40)

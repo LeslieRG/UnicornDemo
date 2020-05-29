@@ -61,29 +61,21 @@ namespace UnicornDemo.Services{
         [HttpPut]
         public IActionResult UpdateUser( [FromBody] Usuario usuario)
         {
-            Usuario usuarioSearch = unitOfWork.Usuarios.GetByID(usuario.Id);
-            if (usuarioSearch != null)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        unitOfWork.Usuarios.Update(usuario);
-                        unitOfWork.Save();
-                        return Ok();
-                    }
+                    unitOfWork.Usuarios.Update(usuario);
+                    unitOfWork.Save();
+                    return Ok();
                 }
-                catch (DataException ex)
-                {
-                    return BadRequest(ex);
-                }
+                else
+                    return BadRequest();
             }
-            else
+            catch (DataException ex)
             {
-                return NotFound("El usuario que intenta actualizar no existe");
+                return BadRequest(ex);
             }
-          
-        return BadRequest(usuario);
         }
 
 

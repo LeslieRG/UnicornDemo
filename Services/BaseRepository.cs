@@ -18,6 +18,7 @@ internal DbSet<TEntity> dbSet;
     {
         this.context = context;
             this.dbSet = context.Set<TEntity>();
+            
     }
 
     public void Delete(TEntity entityToDelete)
@@ -66,15 +67,17 @@ internal DbSet<TEntity> dbSet;
 
     public TEntity GetByID(object id)
     {
-      return dbSet.Find(id);
-    }
+            return dbSet.Find(id);
+            
 
-    // public IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters)
-    // {
-    //    return dbSet.SqlQuery(query, parameters).ToList();
-    // }
+        }
 
-    public void Insert(TEntity entity)
+        // public IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters)
+        // {
+        //    return dbSet.SqlQuery(query, parameters).ToList();
+        // }
+
+        public void Insert(TEntity entity)
     {
          dbSet.Add(entity);
     }
