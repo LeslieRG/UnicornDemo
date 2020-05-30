@@ -83,23 +83,30 @@ namespace UnicornDemo.Services{
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateContact([FromBody] Contacto contacto)
+        [HttpPost("{idUsuario}")]
+        public IActionResult CreateContact([FromBody] Usuario contactoAmigo, int idUsuario)
         {
                 try
                 {
                     if (ModelState.IsValid)
                     {
-                        unitOfWork.Contactos.Insert(contacto);
+                        unitOfWork.Usuarios.Insert(contactoAmigo);
                         unitOfWork.Save();
-                        return Created("UnicornDemo/CreateContact" ,contacto);
+                        
+                        Contacto contacto = new Contacto();
+                        contacto.IdUsuario = idUsuario;
+                        contacto.IdContacto = contactoAmigo.Id;
+                        contacto.FechaCreacion = DateTime.Now;
+                        unitOfWork.Contactos.Insert(contacto);
+                    unitOfWork.Save();
+                    return Created("UnicornDemo/CreateContact" ,contactoAmigo);
                     }
                 }
                     catch (DataException ex)
                     {
                          return BadRequest(ex);
                     }
-             return BadRequest(contacto);
+             return BadRequest(contactoAmigo);
         }
 
         [HttpPut("{id}")]
