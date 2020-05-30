@@ -44,6 +44,7 @@ namespace UnicornDemo.Services{
                 {
                     if (ModelState.IsValid)
                     {
+                        usuario.FechaIngreso = DateTime.Now;
                         unitOfWork.Usuarios.Insert(usuario);
                         unitOfWork.Save();
                         return Created("UnicornDemo/Create" ,usuario);
