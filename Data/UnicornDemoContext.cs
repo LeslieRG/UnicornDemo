@@ -33,7 +33,7 @@ namespace UnicornDemo.Entities.Models
             {
                 entity.HasKey(e => new { e.Id, e.IdUsuario, e.IdContacto })
                     .HasName("PK_Contactos");
-
+                entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 //entity.HasOne(d => d.IdContactoNavigation)
