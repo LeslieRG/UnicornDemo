@@ -5,11 +5,11 @@ namespace UnicornDemo.Entities.Models
 {
     public partial class Usuario
     {
-        public Usuario()
-        {
-            ContactoIdContactoNavigation = new HashSet<Contacto>();
-            ContactoIdUsuarioNavigation = new HashSet<Contacto>();
-        }
+        //public Usuario()
+        //{
+        //    ContactoIdContactoNavigation = new HashSet<Contacto>();
+        //    ContactoIdUsuarioNavigation = new HashSet<Contacto>();
+        //}
 
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -21,7 +21,7 @@ namespace UnicornDemo.Entities.Models
         public string ColorFavorito { get; set; }
         public string Sexo { get; set; }
 
-        public virtual ICollection<Contacto> ContactoIdContactoNavigation { get; set; }
-        public virtual ICollection<Contacto> ContactoIdUsuarioNavigation { get; set; }
+        //public virtual ICollection<Contacto> ContactoIdContactoNavigation { get; set; }
+        //public virtual ICollection<Contacto> ContactoIdUsuarioNavigation { get; set; }
     }
 }

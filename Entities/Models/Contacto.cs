@@ -10,7 +10,7 @@ namespace UnicornDemo.Entities.Models
         public int IdContacto { get; set; }
         public DateTime? FechaCreacion { get; set; }
 
-        public virtual Usuario IdContactoNavigation { get; set; }
-        public virtual Usuario IdUsuarioNavigation { get; set; }
+        //public virtual Usuario IdContactoNavigation { get; set; }
+        //public virtual Usuario IdUsuarioNavigation { get; set; }
     }
 }

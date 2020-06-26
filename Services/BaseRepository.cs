@@ -67,19 +67,13 @@ internal DbSet<TEntity> dbSet;
 
     public TEntity GetByID(object id)
     {
-            return dbSet.Find(id);
-            
+        return dbSet.Find(id);
 
-        }
+    }
 
-        // public IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters)
-        // {
-        //    return dbSet.SqlQuery(query, parameters).ToList();
-        // }
-
-        public void Insert(TEntity entity)
+    public void Insert(TEntity entity)
     {
-         dbSet.Add(entity);
+        dbSet.Add(entity);
     }
 
     public void Update(TEntity entityToUpdate)

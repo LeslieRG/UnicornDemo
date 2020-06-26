@@ -31,10 +31,6 @@ namespace UnicornDemo.Services
             }
         }
 
-        //public IRepository<Usuario> Usuario => throw new System.NotImplementedException();
-
-        //public IRepository<Contacto> Contacto => throw new System.NotImplementedException();
-
         public void Save()
         {
                 _dbContext.SaveChanges();

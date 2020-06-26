@@ -25,7 +25,7 @@ namespace UnicornDemo.Services{
                     var contactos = unitOfWork.Contactos.Get(x => x.IdUsuario == idUsuario);
                     if (contactos != null)
                     {
-                        var result = CreateMappedObject(contactos, idUsuario);
+                        var result = CreateMappedObject(contactos);
 
                         var serializedlist = JsonConvert.SerializeObject(result, Formatting.Indented,
                             new JsonSerializerSettings()
@@ -51,7 +51,7 @@ namespace UnicornDemo.Services{
             }
         }
 
-        private ContactosList CreateMappedObject(IEnumerable<Contacto> contactos, int idUser)
+        private ContactosList CreateMappedObject(IEnumerable<Contacto> contactos)
         {
             ContactosList listFriends = new ContactosList();
             foreach (var item in contactos)
@@ -59,7 +59,7 @@ namespace UnicornDemo.Services{
                 Usuario contactoAmigo = unitOfWork.Usuarios.GetByID(item.IdContacto);
                 listFriends.usuarios.Add(contactoAmigo);
             }
-            listFriends.idUserFriend = idUser;
+            
             return listFriends;
         }
 

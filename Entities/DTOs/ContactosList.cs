@@ -8,7 +8,7 @@ namespace UnicornDemo.Entities.DTOs
 {
     public class ContactosList
     {
-        public int idUserFriend { get; set; }
+        
         public List<Usuario> usuarios = new List<Usuario>();
     }
 }
